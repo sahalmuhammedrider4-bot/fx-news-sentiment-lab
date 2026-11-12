@@ -1,5 +1,7 @@
 # FX News Sentiment Lab
 
+**Live demo:** https://your-app-link.streamlit.app
+
 An interactive Streamlit dashboard that tests a simple question: **does news sentiment help predict currency moves?** It reports honestly when the answer is no.
 
 ![Price vs sentiment](price-vs-sentiment.png)

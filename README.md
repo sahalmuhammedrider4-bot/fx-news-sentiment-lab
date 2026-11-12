@@ -2,6 +2,10 @@
 
 An interactive Streamlit dashboard that tests a simple question: **does news sentiment help predict currency moves?** It reports honestly when the answer is no.
 
+![Price vs sentiment](price-vs-sentiment.png)
+![Lag analysis](lag-analysis.png)
+![Backtest](backtest.png)
+
 ## What it does
 1. Pulls daily FX prices (Yahoo Finance) and weekly-windowed news headlines (Google News RSS) for USD/MYR, EUR/USD, USD/JPY or GBP/USD.
 2. Scores every headline with NLP (VADER with a finance lexicon, or FinBERT).
@@ -36,3 +40,19 @@ Test the analysis code: `python test_pipeline.py` (checks the pipeline can detec
 - Pair-aware sentiment (fine-tune on labelled FX headlines)
 - Add a Malay-language headline source for USD/MYR
 - Deploy on Streamlit Community Cloud or AWS with Docker
+
+- ## Results (USD/MYR, 180 days, VADER sentiment)
+
+| Test | Result |
+|---|---|
+| Headlines analysed | 907 |
+| Trading days | 128 |
+| Lag-1 correlation | r = -0.191, p = 0.032 |
+| Significant after multiple-testing correction? | No (threshold p < 0.008) |
+| Walk-forward accuracy: baseline | 40.3% |
+| Walk-forward accuracy: sentiment model | 52.2% |
+| Gap vs model without sentiment | +7.5 points |
+
+**Conclusion:** I found no statistically reliable evidence that news sentiment predicts next-day USD/MYR moves. The lag-1 correlation was weak and did not survive correction for testing several lags. The sentiment model scored higher in the backtest, but with about 65 test days the difference is within the range expected from chance.
+
+**What I would do next:** extend the history to 365+ days, use a finance-tuned model (FinBERT), and make sentiment currency-specific so that "Fed hikes" counts as bullish for USD.

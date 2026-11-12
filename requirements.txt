@@ -1,0 +1,13 @@
+streamlit
+pandas
+numpy
+scipy
+scikit-learn
+statsmodels
+plotly
+yfinance
+feedparser
+vaderSentiment
+# Optional, for the FinBERT option in the sidebar:
+# transformers
+# torch
